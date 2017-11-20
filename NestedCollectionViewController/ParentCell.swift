@@ -9,6 +9,8 @@
 import UIKit
 
 class ParentCell: UICollectionViewCell {
+    var childViewController: ChildViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

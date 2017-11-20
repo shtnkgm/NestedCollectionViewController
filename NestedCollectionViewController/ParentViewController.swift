@@ -61,11 +61,16 @@ extension ParentViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         guard let parentCell = cell as? ParentCell,
             let childViewController = createChildViewController() else { return cell }
-        
+        if parentCell.childViewController != nil {
+            parentCell.childViewController?.willMove(toParentViewController: nil)
+            parentCell.childViewController?.view.removeFromSuperview()
+            parentCell.childViewController?.removeFromParentViewController()
+        }
         childViewController.number = indexPath.row
         addChildViewController(childViewController)
         childViewController.view.overlay(on: cell)
         didMove(toParentViewController: childViewController)
+        parentCell.childViewController = childViewController
         return parentCell
     }
 }
