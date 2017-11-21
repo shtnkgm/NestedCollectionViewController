@@ -16,7 +16,7 @@ class ChildCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
-    func configure(number: Int, index: Int) {
-        label.text = "\(number)-\(index)"
+    func configure(parentIndex: Int, childIndex: Int) {
+        label.text = "\(parentIndex)-\(childIndex)"
     }
 }

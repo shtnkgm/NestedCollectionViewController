@@ -8,11 +8,11 @@
 
 import UIKit
 
-final class ChildViewController: UIViewController {
+final class ChildViewController: LifecycleLoggingViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    var number: Int = 0
+    var parentIndex: Int = 0
     
     private let margin: CGFloat = 10
     
@@ -27,6 +27,7 @@ final class ChildViewController: UIViewController {
         layout.itemSize = CGSize(width: 100 - margin * 2, height: 100 - margin * 2)
         layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         layout.scrollDirection = .horizontal
+        layout.invalidateLayout()
         return layout
     }
     
@@ -39,6 +40,7 @@ final class ChildViewController: UIViewController {
         let nib = UINib(nibName: reuseIdentifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.collectionViewLayout = collectionViewFlowLayout
         collectionView.contentInsetAdjustmentBehavior = .never
     }
@@ -50,13 +52,19 @@ extension ChildViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         guard let childCell = cell as? ChildCell else { return cell }
-        childCell.configure(number: number, index: indexPath.row)
+        childCell.configure(parentIndex: parentIndex, childIndex: indexPath.row)
         return childCell
+    }
+}
+
+extension ChildViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(className + ":" + #function + "(\(indexPath.row))")
     }
 }

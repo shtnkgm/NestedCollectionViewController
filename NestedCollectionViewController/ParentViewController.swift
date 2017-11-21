@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ParentViewController: UIViewController {
+final class ParentViewController: LifecycleLoggingViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
     
@@ -25,6 +25,7 @@ final class ParentViewController: UIViewController {
         layout.itemSize = CGSize(width: view.bounds.width - margin * 2, height: 100)
         layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         layout.scrollDirection = .vertical
+        layout.invalidateLayout()
         return layout
     }
     
@@ -37,6 +38,7 @@ final class ParentViewController: UIViewController {
         let nib = UINib(nibName: reuseIdentifier, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.collectionViewLayout = collectionViewFlowLayout
         collectionView.contentInsetAdjustmentBehavior = .never
     }
@@ -54,23 +56,32 @@ extension ParentViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         guard let parentCell = cell as? ParentCell,
             let childViewController = createChildViewController() else { return cell }
+
+        // セルが再利用されている場合は、子ViewControllerを取り除く
         if parentCell.childViewController != nil {
             parentCell.childViewController?.willMove(toParentViewController: nil)
             parentCell.childViewController?.view.removeFromSuperview()
             parentCell.childViewController?.removeFromParentViewController()
         }
-        childViewController.number = indexPath.row
+        childViewController.parentIndex = indexPath.row
         addChildViewController(childViewController)
         childViewController.view.overlay(on: cell)
         didMove(toParentViewController: childViewController)
         parentCell.childViewController = childViewController
         return parentCell
+    }
+}
+
+extension ParentViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(className + ":" + #function + "(\(indexPath.row))")
     }
 }

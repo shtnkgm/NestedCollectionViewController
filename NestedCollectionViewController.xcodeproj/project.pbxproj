@@ -19,6 +19,7 @@
 		4FDC5AE31FC322F70009F370 /* ChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDC5AE11FC322F70009F370 /* ChildCell.swift */; };
 		4FDC5AE41FC322F70009F370 /* ChildCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FDC5AE21FC322F70009F370 /* ChildCell.xib */; };
 		4FDC5AE61FC328050009F370 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDC5AE51FC328050009F370 /* UIView+Extension.swift */; };
+		DA691EDD1FC4451D006D32D8 /* LifecycleLoggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA691EDC1FC4451D006D32D8 /* LifecycleLoggingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		4FDC5AE11FC322F70009F370 /* ChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCell.swift; sourceTree = "<group>"; };
 		4FDC5AE21FC322F70009F370 /* ChildCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChildCell.xib; sourceTree = "<group>"; };
 		4FDC5AE51FC328050009F370 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		DA691EDC1FC4451D006D32D8 /* LifecycleLoggingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifecycleLoggingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				4F983E321FC316D000948AD6 /* AppDelegate.swift */,
 				4FDC5AE51FC328050009F370 /* UIView+Extension.swift */,
+				DA691EDC1FC4451D006D32D8 /* LifecycleLoggingViewController.swift */,
 				4F983E341FC316D000948AD6 /* ParentViewController.swift */,
 				4F983E361FC316D000948AD6 /* ParentViewController.storyboard */,
 				4F983E441FC317F900948AD6 /* ParentCell.swift */,
@@ -164,6 +167,7 @@
 				4F983E351FC316D000948AD6 /* ParentViewController.swift in Sources */,
 				4F983E331FC316D000948AD6 /* AppDelegate.swift in Sources */,
 				4FDC5AE31FC322F70009F370 /* ChildCell.swift in Sources */,
+				DA691EDD1FC4451D006D32D8 /* LifecycleLoggingViewController.swift in Sources */,
 				4F983E461FC317F900948AD6 /* ParentCell.swift in Sources */,
 				4F983E491FC3224000948AD6 /* ChildViewController.swift in Sources */,
 			);
