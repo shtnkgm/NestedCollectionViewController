@@ -13,43 +13,47 @@ class LifecycleLoggingViewController: UIViewController {
         return NSStringFromClass(type(of:self)).components(separatedBy: ".")[1]
     }
     
+    private func log(methodName: String = #function) {
+        print(className + ":" + methodName)
+    }
+    
     override func viewDidLoad() {
-        print(className + ":" + #function)
+        log()
         super.viewDidLoad()
     }
     
     override func viewDidLayoutSubviews() {
-        print(className + ":" + #function)
+        log()
         super.viewDidLayoutSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(className + ":" + #function)
+        log()
         super.viewWillAppear(animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print(className + ":" + #function)
+        log()
         super.viewDidAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print(className + ":" + #function)
+        log()
         super.viewWillDisappear(animated)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print(className + ":" + #function)
+        log()
         super.viewDidDisappear(animated)
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
-        print(className + ":" + #function)
+        log()
         super.willMove(toParentViewController: parent)
     }
     
     override func didMove(toParentViewController parent: UIViewController?) {
-        print(className + ":" + #function)
+        log()
         super.didMove(toParentViewController: parent)
     }
 }
