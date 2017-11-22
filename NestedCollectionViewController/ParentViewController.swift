@@ -41,6 +41,7 @@ final class ParentViewController: LifecycleLoggingViewController {
         collectionView.delegate = self
         collectionView.collectionViewLayout = collectionViewFlowLayout
         collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.contentInset = .zero
     }
 }
 
