@@ -42,12 +42,6 @@ final class ParentViewController: LifecycleLoggingViewController {
         collectionView.collectionViewLayout = collectionViewFlowLayout
         collectionView.contentInsetAdjustmentBehavior = .never
     }
-    
-    private func createChildViewController() -> ChildViewController? {
-        let className = String(describing: ChildViewController.self)
-        let storyboard = UIStoryboard(name: className, bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: className) as? ChildViewController
-    }
 }
 
 extension ParentViewController: UICollectionViewDataSource {
@@ -60,22 +54,9 @@ extension ParentViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        guard let parentCell = cell as? ParentCell,
-            let childViewController = createChildViewController() else { return cell }
-
-        // セルが再利用されている場合は、子ViewControllerを取り除く
-        if parentCell.childViewController != nil {
-            parentCell.childViewController?.willMove(toParentViewController: nil)
-            parentCell.childViewController?.view.removeFromSuperview()
-            parentCell.childViewController?.removeFromParentViewController()
-        }
-        childViewController.parentIndex = indexPath.row
-        addChildViewController(childViewController)
-        childViewController.view.overlay(on: cell)
-        didMove(toParentViewController: childViewController)
-        parentCell.childViewController = childViewController
+        guard let parentCell = cell as? ParentCell else { return cell }
+        parentCell.configure(parentViewController: self, index: indexPath.row)
         return parentCell
     }
 }
